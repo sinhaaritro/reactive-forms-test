@@ -1,7 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:test_reactive_forms/form_data.dart';
+import 'package:test_reactive_forms/form_section1.dart';
+import 'package:test_reactive_forms/form_section2.dart';
+import 'package:test_reactive_forms/form_section3.dart';
+import 'package:test_reactive_forms/form_section4.dart';
+import 'package:test_reactive_forms/page_indicator.dart';
 
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
@@ -10,49 +16,67 @@ class MyHomePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends ConsumerState<MyHomePage> {
-  final form = FormGroup({
-    'name': FormControl<String>(value: 'John Doe'),
-    'email': FormControl<String>(validators: [
-      Validators.required,
-      Validators.email,
-    ]),
-    'password': FormControl<String>(validators: [Validators.minLength(8)]),
-    'passwordConfirm': FormControl<String>(),
-    'email2phone': FormControl<String>(validators: [
-      Validators.composeOR([
-        Validators.email,
-        Validators.pattern(r'/\d/g'),
-      ])
-    ]),
-    'dateOfBirth': FormControl<DateTime>(),
-    'gender': FormControl<String>(),
-    'card': FormControl<String>(
-        validators: [Validators.pattern(r'^3[47][0-9]{13}$')]),
-    'address': FormGroup({
-      'street': FormControl<String>(validators: [Validators.required]),
-      'city': FormControl<String>(validators: [Validators.required]),
-      'zip': FormControl<String>(validators: [Validators.required]),
-      'state': FormControl<String>(validators: [Validators.required]),
-      'country': FormControl<String>(validators: [Validators.required]),
-    })
-  }, validators: [
-    Validators.mustMatch('password', 'passwordConfirm')
-  ]);
+class _MyHomePageState extends ConsumerState<MyHomePage>
+    with TickerProviderStateMixin {
+  late PageController _pageViewController;
+  late TabController _tabController;
+  int _currentPageIndex = 0;
+  final int _maxPageIndex = 4;
 
-  void _printEnteredName() {
-    print(form.control('name').value);
+  @override
+  void initState() {
+    super.initState();
+    _pageViewController = PageController();
+    _tabController = TabController(length: _maxPageIndex, vsync: this);
   }
 
-  void _printForm() {
-    print(form.value);
+  @override
+  void dispose() {
+    super.dispose();
+    _pageViewController.dispose();
+    _tabController.dispose();
+  }
+
+  void _handlePageViewChanged(int currentPageIndex) {
+    if (!_isOnDesktopAndWeb) {
+      return;
+    }
+    _tabController.index = currentPageIndex;
+    setState(() {
+      _currentPageIndex = currentPageIndex;
+    });
+  }
+
+  void _updateCurrentPageIndex(int index) {
+    _tabController.index = index;
+    _pageViewController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  bool get _isOnDesktopAndWeb {
+    if (kIsWeb) {
+      return true;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.macOS:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return true;
+      case TargetPlatform.android:
+      case TargetPlatform.iOS:
+      case TargetPlatform.fuchsia:
+        return false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     FormGroup formGroup = ref.watch(formDataProvider());
-    AbstractControl<dynamic> stateControl = form.control('address.state');
-    stateControl.markAsDisabled();
+    // AbstractControl<dynamic> stateControl = formGroup.control('address.state');
+    // stateControl.markAsDisabled();
 
     return Scaffold(
       appBar: AppBar(
@@ -61,71 +85,28 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       ),
       body: ReactiveForm(
         formGroup: formGroup,
-        child: ListView(
-          children: <Widget>[
-            ReactiveTextField(
-              key: const Key('name'),
-              formControlName: 'name',
-              textInputAction: TextInputAction.next,
-              onSubmitted: (control) => form.focus('email'),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            PageView(
+              controller: _pageViewController,
+              onPageChanged: _handlePageViewChanged,
+              children: <Widget>[
+                FormSection1(formGroup: formGroup),
+                FormSection2(formGroup: formGroup),
+                FormSection3(formGroup: formGroup),
+                FormSection4(formGroup: formGroup)
+              ],
             ),
-            ReactiveTextField(
-                key: const Key('email'),
-                formControlName: 'email',
-                validationMessages: {
-                  ValidationMessage.required: (error) =>
-                      'The email must not be empty',
-                  ValidationMessage.email: (error) =>
-                      'The email value must be a valid email',
-                }),
-            ReactiveTextField(
-                key: const Key('password'),
-                formControlName: 'password',
-                obscureText: true,
-                validationMessages: {
-                  ValidationMessage.minLength: (error) =>
-                      'The password must be at least ${(error as Map)['requiredLength']} characters long'
-                }),
-            ReactiveTextField(
-              key: const Key('passwordConfirm'),
-              formControlName: 'passwordConfirm',
-              obscureText: true,
-            ),
-            ReactiveTextField(
-              formControlName: 'dateOfBirth',
-              valueAccessor: DateTimeValueAccessor(),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                suffixIcon: ReactiveDatePicker(
-                  formControlName: 'dateOfBirth',
-                  firstDate: DateTime(1985),
-                  lastDate: DateTime.now(),
-                  builder: (context, picker, child) {
-                    return IconButton(
-                      onPressed: picker.showPicker,
-                      icon: const Icon(Icons.access_time),
-                    );
-                  },
-                ),
-              ),
-            ),
-            ReactiveFormConsumer(
-              builder: (context, form, child) {
-                return ElevatedButton(
-                  onPressed: formGroup.valid ? _printForm : null,
-                  child: const Text('Submit'),
-                );
-              },
+            PageIndicator(
+              tabController: _tabController,
+              currentPageIndex: _currentPageIndex,
+              maxPageIndex:_maxPageIndex,
+              onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+              isOnDesktopAndWeb: _isOnDesktopAndWeb,
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _printForm();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.save),
       ),
     );
   }
