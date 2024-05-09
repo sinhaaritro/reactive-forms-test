@@ -50,7 +50,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    FormGroup formGroup = ref.watch(formDataProvider);
+    FormGroup formGroup = ref.watch(formDataProvider());
     AbstractControl<dynamic> stateControl = form.control('address.state');
     stateControl.markAsDisabled();
 
