@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:test_reactive_forms/form_data.dart';
 
 class FormSection4 extends ConsumerWidget {
   const FormSection4({
@@ -16,36 +17,24 @@ class FormSection4 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       children: [
-        // ReactiveTextField(
-        //   formControlName: 'dateOfBirth',
-        //   valueAccessor: DateTimeValueAccessor(),
-        //   decoration: InputDecoration(
-        //     border: InputBorder.none,
-        //     suffixIcon: ReactiveDatePicker(
-        //       formControlName: 'dateOfBirth',
-        //       firstDate: DateTime(1985),
-        //       lastDate: DateTime.now(),
-        //       builder: (context, picker, child) {
-        //         return IconButton(
-        //           onPressed: picker.showPicker,
-        //           icon: const Icon(Icons.access_time),
-        //         );
-        //       },
-        //     ),
-        //   ),
-        // ),
+        ReactiveCheckboxListTile(
+          key: Key(FormStaticData.acceptTerms.key),
+          formControlName: FormStaticData.acceptTerms.field,
+          title: const Text('Accept terms & conditions'),
+        ),
+        const SizedBox(height: 8),
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
-              onPressed: form.valid
-                  ? () {
-                      print(form.value);
-                      const snackBar = SnackBar(
-                        content: Text('Valid Form'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                  : null,
+              onPressed: () {
+                print(form.value);
+                if (form.valid) {
+                  const snackBar = SnackBar(
+                    content: Text('Valid Form'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
               child: const Text('Next Page'),
             );
           },

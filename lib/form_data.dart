@@ -39,6 +39,13 @@ class FormStaticData {
       field: '${FormStaticData.systemInfo.field}.passwordConfirm',
       hintText: 'Enter password again',
       labelText: 'Confirm Password');
+
+  static FormField personnelInfo = FormField(key: 'personnelInfo');
+  static FormField contactInfo = FormField(key: 'contactInfo');
+  static FormField finalCheck = FormField(key: 'finalCheck');
+  static FormField acceptTerms = FormField(
+      key: 'acceptTerms',
+      field: '${FormStaticData.finalCheck.field}.acceptTerms');
   static const String firstNameKey = 'firstName';
   static const String lastNameKey = 'lastName';
   static const String email2phoneKey = 'email2phone';
@@ -73,6 +80,12 @@ class FormData extends _$FormData {
             Validators.minLength(2),
           ]),
           FormStaticData.passwordConfirm.key: FormControl<String>(),
+        }),
+        FormStaticData.personnelInfo.key: FormGroup({}),
+        FormStaticData.contactInfo.key: FormGroup({}),
+        FormStaticData.finalCheck.key: FormGroup({
+          FormStaticData.acceptTerms.key:
+              FormControl<bool>(validators: [Validators.required]),
         }),
         FormStaticData.email2phoneKey: FormControl<String>(validators: [
           Validators.composeOR([
