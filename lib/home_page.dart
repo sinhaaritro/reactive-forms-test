@@ -92,7 +92,10 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
               controller: _pageViewController,
               onPageChanged: _handlePageViewChanged,
               children: <Widget>[
-                FormSection1(formGroup: formGroup),
+                FormSection1(
+                  formGroup: formGroup,
+                  onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                ),
                 FormSection2(formGroup: formGroup),
                 FormSection3(formGroup: formGroup),
                 FormSection4(formGroup: formGroup)
@@ -101,7 +104,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
             PageIndicator(
               tabController: _tabController,
               currentPageIndex: _currentPageIndex,
-              maxPageIndex:_maxPageIndex,
+              maxPageIndex: _maxPageIndex,
               onUpdateCurrentPageIndex: _updateCurrentPageIndex,
               isOnDesktopAndWeb: _isOnDesktopAndWeb,
             ),
