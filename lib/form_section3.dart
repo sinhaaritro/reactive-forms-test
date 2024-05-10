@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class FormSection3 extends ConsumerWidget {
-  const FormSection3({super.key, required this.formGroup});
+  const FormSection3({super.key, required this.formGroup,
+    required this.onUpdateCurrentPageIndex,
+  });
 
   final FormGroup formGroup;
+  final void Function(int) onUpdateCurrentPageIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +36,7 @@ class FormSection3 extends ConsumerWidget {
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
-              onPressed: () {},
+              onPressed: () => onUpdateCurrentPageIndex(3),
               child: const Text('Next Page'),
             );
           },

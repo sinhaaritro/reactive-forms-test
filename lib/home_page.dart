@@ -96,9 +96,15 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
                   formGroup: formGroup,
                   onUpdateCurrentPageIndex: _updateCurrentPageIndex,
                 ),
-                FormSection2(formGroup: formGroup),
-                FormSection3(formGroup: formGroup),
-                FormSection4(formGroup: formGroup)
+                FormSection2(formGroup: formGroup,
+                  onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                ),
+                FormSection3(formGroup: formGroup,
+                  onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                ),
+                FormSection4(formGroup: formGroup,
+                  onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                )
               ],
             ),
             PageIndicator(
