@@ -1,8 +1,8 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:test_reactive_forms/user.dart';
+import 'package:test_reactive_forms/data/user.dart';
 
-part 'form_data.g.dart';
+part '../form_data.g.dart';
 
 class FormField {
   final String key;

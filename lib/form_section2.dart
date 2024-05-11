@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:test_reactive_forms/date_time_value_accessor.dart';
-import 'package:test_reactive_forms/form_data.dart';
-import 'package:test_reactive_forms/user.dart';
+import 'package:test_reactive_forms/form/date_time_value_accessor.dart';
+import 'package:test_reactive_forms/form/form_data.dart';
+import 'package:test_reactive_forms/data/user.dart';
 
 class FormSection2 extends ConsumerWidget {
   const FormSection2({

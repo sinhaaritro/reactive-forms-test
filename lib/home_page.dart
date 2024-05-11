@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:test_reactive_forms/form_data.dart';
+import 'package:test_reactive_forms/form/form_data.dart';
 import 'package:test_reactive_forms/form_section1.dart';
 import 'package:test_reactive_forms/form_section2.dart';
 import 'package:test_reactive_forms/form_section3.dart';
 import 'package:test_reactive_forms/form_section4.dart';
-import 'package:test_reactive_forms/page_indicator.dart';
+import 'package:test_reactive_forms/components/page_indicator.dart';
 
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
