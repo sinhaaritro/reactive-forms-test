@@ -25,6 +25,8 @@ class FormSection2 extends ConsumerStatefulWidget {
 
 class _FormSection2State extends ConsumerState<FormSection2> {
   FormGroup get formGroup => widget.formGroup;
+  void Function(int) get onUpdateCurrentPageIndex =>
+      widget.onUpdateCurrentPageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -144,11 +146,9 @@ class _FormSection2State extends ConsumerState<FormSection2> {
           items: countries
               .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
               .toList(),
-          onChanged: (control) {
-            setState(() => formGroup
-                .control(FormStaticData.currentState.field)
-                .value = null);
-          },
+          onChanged: (control) => setState(() => formGroup
+              .control(FormStaticData.currentState.field)
+              .value = null),
         ),
         const SizedBox(height: 8.0),
         ReactiveDropdownField<CountryState>(
@@ -224,11 +224,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
-              onPressed: () {
-                print(formGroup.valid);
-                print(formGroup.value);
-                // onUpdateCurrentPageIndex(2);
-              },
+              onPressed: () => onUpdateCurrentPageIndex(2),
               child: const Text('Next Page'),
             );
           },
