@@ -58,6 +58,7 @@ class FormSection1 extends ConsumerWidget {
                   'The email must not be empty',
               ValidationMessage.email: (error) =>
                   'The email value must be a valid email',
+              // TODO : Add Unique Email Validator
               'unique': (_) => 'This email is already in use'
             }),
         const SizedBox(height: 8),
@@ -105,7 +106,9 @@ class FormSection1 extends ConsumerWidget {
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
+              // TODO: Key to focus on button
               key: const Key('submit-section-1'),
+              // TODO: Password and password confim validation should happen here
               onPressed: form.control(FormStaticData.systemInfo.key).valid
                   ? () => onUpdateCurrentPageIndex(1)
                   : null,
