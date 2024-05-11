@@ -48,6 +48,11 @@ class FormStaticData {
       field: '${FormStaticData.personnelInfo.field}.genderName',
       hintText: 'Enter Gender Name',
       labelText: 'Enter Gender Name');
+  static FormField dateOfBirth = FormField(
+      key: 'dateOfBirth',
+      field: '${FormStaticData.personnelInfo.field}.dateOfBirth',
+      hintText: 'YYYY-MM-DD',
+      labelText: 'Enter Date of Birth');
 
   static FormField contactInfo = FormField(key: 'contactInfo');
   static FormField finalCheck = FormField(key: 'finalCheck');
@@ -57,7 +62,6 @@ class FormStaticData {
   static const String firstNameKey = 'firstName';
   static const String lastNameKey = 'lastName';
   static const String email2phoneKey = 'email2phone';
-  static const String dateOfBirthKey = 'dateOfBirth';
 }
 
 @riverpod
@@ -95,12 +99,22 @@ class FormData extends _$FormData {
         }),
         FormStaticData.personnelInfo.key: FormGroup({
           FormStaticData.gender.key: FormControl<Gender>(
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
+          FormStaticData.genderName.key: FormControl<String>(
+              // disabled: true,
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
+          FormStaticData.dateOfBirth.key: FormControl<DateTime>(
             validators: [
               Validators.required,
             ],
           ),
-          FormStaticData.genderName.key: FormControl<String>(
-            disabled: true,
+          'date': FormControl<DateTime>(
             validators: [
               Validators.required,
             ],
@@ -120,11 +134,6 @@ class FormData extends _$FormData {
             //       Validators.pattern(r'/\d/g'),
             //     ],
             //   )
-            // ],
-            ),
-        FormStaticData.dateOfBirthKey: FormControl<DateTime>(
-            // validators: [
-            //   Validators.required,
             // ],
             ),
       },
