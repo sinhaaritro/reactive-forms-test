@@ -34,8 +34,8 @@ class _FormSection2State extends ConsumerState<FormSection2> {
       padding: const EdgeInsets.all(8),
       children: [
         ReactiveRadioListTile<Gender>(
-          key: Key(Gender.male.name),
-          title: Text(Gender.male.humanReadableName),
+          key: Key(Gender.male.id),
+          title: Text(Gender.male.name),
           value: Gender.male,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
@@ -43,8 +43,8 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               .markAsDisabled(),
         ),
         ReactiveRadioListTile<Gender>(
-          key: Key(Gender.female.name),
-          title: Text(Gender.female.humanReadableName),
+          key: Key(Gender.female.id),
+          title: Text(Gender.female.name),
           value: Gender.female,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
@@ -52,8 +52,8 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               .markAsDisabled(),
         ),
         ReactiveRadioListTile<Gender>(
-          key: Key(Gender.others.name),
-          title: Text(Gender.others.humanReadableName),
+          key: Key(Gender.others.id),
+          title: Text(Gender.others.name),
           value: Gender.others,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
