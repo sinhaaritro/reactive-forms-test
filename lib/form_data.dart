@@ -1,6 +1,6 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:test_reactive_forms/unique_email_async_validator.dart';
+import 'package:test_reactive_forms/user.dart';
 
 part 'form_data.g.dart';
 
@@ -41,6 +41,14 @@ class FormStaticData {
       labelText: 'Confirm Password');
 
   static FormField personnelInfo = FormField(key: 'personnelInfo');
+  static FormField gender = FormField(
+      key: 'gender', field: '${FormStaticData.personnelInfo.field}.gender');
+  static FormField genderName = FormField(
+      key: 'genderName',
+      field: '${FormStaticData.personnelInfo.field}.genderName',
+      hintText: 'Enter Gender Name',
+      labelText: 'Enter Gender Name');
+
   static FormField contactInfo = FormField(key: 'contactInfo');
   static FormField finalCheck = FormField(key: 'finalCheck');
   static FormField acceptTerms = FormField(
@@ -63,44 +71,67 @@ class FormData extends _$FormData {
     return FormGroup(
       {
         FormStaticData.systemInfo.key: FormGroup({
-          FormStaticData.userName.key: FormControl<String>(validators: [
-            Validators.required,
-            Validators.minLength(3),
-          ]),
+          FormStaticData.userName.key: FormControl<String>(
+              // validators: [
+              //   Validators.required,
+              //   Validators.minLength(3),
+              // ],
+              ),
           FormStaticData.email.key: FormControl<String>(
-            validators: [
-              Validators.required,
-              Validators.email,
-            ],
-            asyncValidators: [UniqueEmailAsyncValidator()],
-            asyncValidatorsDebounceTime: 1000,
-          ),
-          FormStaticData.password.key: FormControl<String>(validators: [
-            Validators.required,
-            Validators.minLength(2),
-          ]),
+              // validators: [
+              //   Validators.required,
+              //   Validators.email,
+              // ],
+              // asyncValidators: [UniqueEmailAsyncValidator()],
+              // asyncValidatorsDebounceTime: 1000,
+              ),
+          FormStaticData.password.key: FormControl<String>(
+              // validators: [
+              //   Validators.required,
+              //   Validators.minLength(2),
+              // ],
+              ),
           FormStaticData.passwordConfirm.key: FormControl<String>(),
         }),
-        FormStaticData.personnelInfo.key: FormGroup({}),
+        FormStaticData.personnelInfo.key: FormGroup({
+          FormStaticData.gender.key: FormControl<Gender>(
+            validators: [
+              Validators.required,
+            ],
+          ),
+          FormStaticData.genderName.key: FormControl<String>(
+            disabled: true,
+            validators: [
+              Validators.required,
+            ],
+          ),
+        }),
         FormStaticData.contactInfo.key: FormGroup({}),
         FormStaticData.finalCheck.key: FormGroup({
-          FormStaticData.acceptTerms.key:
-              FormControl<bool>(validators: [Validators.required]),
+          FormStaticData.acceptTerms.key: FormControl<bool>(
+              // validators: [Validators.required],
+              ),
         }),
-        FormStaticData.email2phoneKey: FormControl<String>(validators: [
-          Validators.composeOR([
-            Validators.email,
-            Validators.pattern(r'/\d/g'),
-          ])
-        ]),
-        FormStaticData.dateOfBirthKey: FormControl<DateTime>(validators: [
-          Validators.required,
-        ]),
+        FormStaticData.email2phoneKey: FormControl<String>(
+            // validators: [
+            //   Validators.composeOR(
+            //     [
+            //       Validators.email,
+            //       Validators.pattern(r'/\d/g'),
+            //     ],
+            //   )
+            // ],
+            ),
+        FormStaticData.dateOfBirthKey: FormControl<DateTime>(
+            // validators: [
+            //   Validators.required,
+            // ],
+            ),
       },
-      validators: [
-        Validators.mustMatch(FormStaticData.password.field,
-            FormStaticData.passwordConfirm.field),
-      ],
+      // validators: [
+      //   Validators.mustMatch(FormStaticData.password.field,
+      //       FormStaticData.passwordConfirm.field),
+      // ],
     );
   }
 
