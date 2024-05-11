@@ -52,6 +52,14 @@ class FormSection1 extends ConsumerWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
+              suffixIcon: ReactiveStatusListenableBuilder(
+                formControlName: FormStaticData.email.field,
+                builder: (context, control, child) {
+                  return control.pending
+                      ? const CircularProgressIndicator()
+                      : Container(width: 0);
+                },
+              ),
             ),
             validationMessages: {
               ValidationMessage.required: (error) =>
