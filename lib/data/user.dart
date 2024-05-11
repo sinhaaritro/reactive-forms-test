@@ -1,7 +1,24 @@
 import 'address.dart';
 import 'card.dart';
 
-enum Gender { male, female, others }
+enum Gender {
+  male,
+  female,
+  others;
+
+  String get humanReadableName {
+    switch (this) {
+      case Gender.male:
+        return 'Male';
+      case Gender.female:
+        return 'Female';
+      case Gender.others:
+        return 'Others';
+      default:
+        return '';
+    }
+  }
+}
 
 class User {
   // System Info

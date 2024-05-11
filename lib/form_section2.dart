@@ -35,7 +35,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
       children: [
         ReactiveRadioListTile<Gender>(
           key: Key(Gender.male.name),
-          title: Text(Gender.male.name),
+          title: Text(Gender.male.humanReadableName),
           value: Gender.male,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
@@ -44,7 +44,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         ),
         ReactiveRadioListTile<Gender>(
           key: Key(Gender.female.name),
-          title: Text(Gender.female.name),
+          title: Text(Gender.female.humanReadableName),
           value: Gender.female,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
@@ -53,7 +53,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         ),
         ReactiveRadioListTile<Gender>(
           key: Key(Gender.others.name),
-          title: Text(Gender.others.name),
+          title: Text(Gender.others.humanReadableName),
           value: Gender.others,
           formControlName: FormStaticData.gender.field,
           onChanged: (control) => formGroup
