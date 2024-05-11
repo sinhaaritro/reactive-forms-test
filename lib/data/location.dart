@@ -23,11 +23,11 @@ class Country {
   }
 }
 
-class State {
+class CountryState {
   final Country country;
   final String name;
 
-  State(this.name, this.country);
+  CountryState(this.name, this.country);
 
   @override
   String toString() {
@@ -37,7 +37,7 @@ class State {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is State &&
+      other is CountryState &&
           runtimeType == other.runtimeType &&
           name == other.name &&
           country == other.country;
@@ -45,16 +45,16 @@ class State {
   @override
   int get hashCode => name.hashCode ^ country.hashCode;
 
-  State copyWith({String? name, Country? country}) {
-    return State(name ?? this.name, country ?? this.country);
+  CountryState copyWith({String? name, Country? country}) {
+    return CountryState(name ?? this.name, country ?? this.country);
   }
 }
 
 List<Country> countries = <Country>[Country('India'), Country('USA')];
 
-List<State> states = <State>[
-  State('Maharashtra', Country('India')),
-  State('Gujarat', Country('India')),
-  State('Alaska', Country('USA')),
-  State('Texas', Country('USA'))
+List<CountryState> states = <CountryState>[
+  CountryState('Maharashtra', Country('India')),
+  CountryState('Gujarat', Country('India')),
+  CountryState('Alaska', Country('USA')),
+  CountryState('Texas', Country('USA'))
 ];

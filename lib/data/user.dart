@@ -21,7 +21,7 @@ class Address {
   final String address1;
   final String? address2;
   final Country country;
-  final State state;
+  final CountryState state;
   final int zip;
 
   Address(
@@ -59,7 +59,7 @@ class Address {
       {String? address1,
       String? address2,
       Country? country,
-      State? state,
+      CountryState? state,
       int? zip}) {
     return Address(
         address1: address1 ?? this.address1,

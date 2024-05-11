@@ -1,5 +1,6 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:test_reactive_forms/data/location.dart';
 import 'package:test_reactive_forms/data/user.dart';
 
 part '../form_data.g.dart';
@@ -18,6 +19,7 @@ class FormField {
 }
 
 class FormStaticData {
+  // System Info
   static FormField systemInfo = FormField(key: 'systemInfo');
   static FormField userName = FormField(
       key: 'userName',
@@ -40,6 +42,7 @@ class FormStaticData {
       hintText: 'Enter password again',
       labelText: 'Confirm Password');
 
+  // Personal Info
   static FormField personnelInfo = FormField(key: 'personnelInfo');
   static FormField gender = FormField(
       key: 'gender', field: '${FormStaticData.personnelInfo.field}.gender');
@@ -53,8 +56,37 @@ class FormStaticData {
       field: '${FormStaticData.personnelInfo.field}.dateOfBirth',
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
+  static FormField currentCountry = FormField(
+      key: 'currentCountry',
+      field: '${FormStaticData.personnelInfo.field}.currentCountry',
+      hintText: 'Enter Current Country',
+      labelText: 'Enter Current Country');
+  static FormField currentState = FormField(
+      key: 'currentState',
+      field: '${FormStaticData.personnelInfo.field}.currentState',
+      hintText: 'Enter Current State',
+      labelText: 'Enter Current State');
+  static FormField currentAddress1 = FormField(
+      key: 'currentAddress1',
+      field: '${FormStaticData.personnelInfo.field}.currentAddress1',
+      hintText: 'Enter Address Line 1',
+      labelText: 'Enter Address Line 1');
+  static FormField currentAddress2 = FormField(
+      key: 'currentAddress2',
+      field: '${FormStaticData.personnelInfo.field}.currentAddress2',
+      hintText: 'Enter Address Line 2',
+      labelText: 'Enter Address Line 2');
+  static FormField currentPincode = FormField(
+      key: 'currentPincode',
+      field: '${FormStaticData.personnelInfo.field}.currentPincode',
+      hintText: 'Enter current Pincode',
+      labelText: 'Enter current Pincode');
 
+  // Contact Info
   static FormField contactInfo = FormField(key: 'contactInfo');
+  // Family Info
+  static FormField familyInfo = FormField(key: 'familyInfo');
+  // Final Check
   static FormField finalCheck = FormField(key: 'finalCheck');
   static FormField acceptTerms = FormField(
       key: 'acceptTerms',
@@ -110,15 +142,28 @@ class FormData extends _$FormData {
               // ],
               ),
           FormStaticData.dateOfBirth.key: FormControl<DateTime>(
-            validators: [
-              Validators.required,
-            ],
-          ),
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
           'date': FormControl<DateTime>(
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
+          FormStaticData.currentCountry.key: FormControl<Country>(
             validators: [
               Validators.required,
             ],
           ),
+          FormStaticData.currentState.key: FormControl<CountryState>(
+            validators: [
+              Validators.required,
+            ],
+          ),
+          FormStaticData.currentAddress1.key: FormControl<String>(),
+          FormStaticData.currentAddress2.key: FormControl<String>(),
+          FormStaticData.currentPincode.key: FormControl<int>(),
         }),
         FormStaticData.contactInfo.key: FormGroup({}),
         FormStaticData.finalCheck.key: FormGroup({
