@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:test_reactive_forms/data/location.dart';
 import 'package:test_reactive_forms/data/user.dart';
 
-part '../form_data.g.dart';
+part 'form_data.g.dart';
 
 class FormField {
   final String key;
@@ -84,6 +84,12 @@ class FormStaticData {
 
   // Contact Info
   static FormField contactInfo = FormField(key: 'contactInfo');
+  static FormField emailOrPhone = FormField(
+      key: 'emailOrPhone',
+      field: '${FormStaticData.contactInfo.field}.emailOrPhone',
+      hintText: 'Enter alternate email or phone number',
+      labelText: 'Enter alternate email or phone number');
+
   // Family Info
   static FormField familyInfo = FormField(key: 'familyInfo');
   // Final Check
@@ -93,7 +99,7 @@ class FormStaticData {
       field: '${FormStaticData.finalCheck.field}.acceptTerms');
   static const String firstNameKey = 'firstName';
   static const String lastNameKey = 'lastName';
-  static const String email2phoneKey = 'email2phone';
+  static const String emailOrPhoneKey = 'email2phone';
 }
 
 @riverpod
@@ -152,26 +158,30 @@ class FormData extends _$FormData {
               // ],
               ),
           FormStaticData.currentCountry.key: FormControl<Country>(
-            validators: [
-              Validators.required,
-            ],
-          ),
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
           FormStaticData.currentState.key: FormControl<CountryState>(
-            validators: [
-              Validators.required,
-            ],
-          ),
+              // validators: [
+              //   Validators.required,
+              // ],
+              ),
           FormStaticData.currentAddress1.key: FormControl<String>(),
           FormStaticData.currentAddress2.key: FormControl<String>(),
           FormStaticData.currentPincode.key: FormControl<int>(),
         }),
-        FormStaticData.contactInfo.key: FormGroup({}),
+        FormStaticData.contactInfo.key: FormGroup({
+          FormStaticData.emailOrPhone.key: FormArray<String>([
+            FormControl<String>(value: 'a@g.cm'),
+          ]),
+        }),
         FormStaticData.finalCheck.key: FormGroup({
           FormStaticData.acceptTerms.key: FormControl<bool>(
               // validators: [Validators.required],
               ),
         }),
-        FormStaticData.email2phoneKey: FormControl<String>(
+        FormStaticData.emailOrPhoneKey: FormControl<String>(
             // validators: [
             //   Validators.composeOR(
             //     [
