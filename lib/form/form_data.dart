@@ -230,8 +230,10 @@ class FormStaticData {
           ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
-  static FormField<DateTime> dateOfEntry = FormField(
-      key: 'dateOfEntry',
+  static FormField spouse =
+      FormField(key: 'spouse', control: FormControl<bool>());
+  static FormField<DateTime> spouseBirth = FormField(
+      key: 'spouseBirth',
       control: FormControl<DateTime>(
           // validators: [
           //   Validators.required,
@@ -291,7 +293,8 @@ class FormData extends _$FormData {
             [FormStaticData.emailOrPhone.control..patchValue('a@g.cm')]),
 
         FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
-        FormStaticData.dateOfEntry.key: FormStaticData.dateOfEntry.control,
+        FormStaticData.spouse.key: FormStaticData.spouse.control,
+        FormStaticData.spouseBirth.key: FormStaticData.spouseBirth.control,
 
         // Final Check
         FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,

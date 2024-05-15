@@ -49,8 +49,14 @@ class _FormSection2State extends ConsumerState<FormSection4> {
           ),
         ),
         const SizedBox(height: 8),
+        ReactiveSwitchListTile.adaptative(
+          key: Key(FormStaticData.spouse.key),
+          formControlName: FormStaticData.spouse.fullName,
+          title: Text(FormStaticData.spouse.labelText),
+        ),
+        const SizedBox(height: 8),
         ReactiveDatePicker<DateTime>(
-          formControlName: FormStaticData.dateOfEntry.fullName,
+          formControlName: FormStaticData.spouseBirth.fullName,
           firstDate: DateTime(1985),
           lastDate: DateTime(2030),
           builder: (context, picker, child) {
@@ -66,7 +72,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
             return ReactiveTextField(
               onTap: (value) => picker.showPicker(),
               valueAccessor: DateTimeValueAccessor(),
-              formControlName: FormStaticData.dateOfEntry.fullName,
+              formControlName: FormStaticData.spouseBirth.fullName,
               readOnly: true,
               validationMessages: {
                 ValidationMessage.required: (error) =>
