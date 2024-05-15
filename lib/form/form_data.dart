@@ -170,15 +170,6 @@ class FormStaticData {
           ),
       hintText: 'Enter Gender Name',
       labelText: 'Enter Gender Name');
-  static FormField<DateTime> dateOfBirth = FormField(
-      key: 'dateOfBirth',
-      control: FormControl<DateTime>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
-      hintText: 'YYYY-MM-DD',
-      labelText: 'Enter Date of Birth');
   static FormField<Country> currentCountry = FormField(
       key: 'currentCountry',
       control: FormControl<Country>(
@@ -230,6 +221,24 @@ class FormStaticData {
 
   // Family Info
   static FormFieldGroup familyInfo = FormFieldGroup(key: 'familyInfo');
+  static FormField<DateTime> dateOfBirth = FormField(
+      key: 'dateOfBirth',
+      control: FormControl<DateTime>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
+      hintText: 'YYYY-MM-DD',
+      labelText: 'Enter Date of Birth');
+  static FormField<DateTime> dateOfEntry = FormField(
+      key: 'dateOfEntry',
+      control: FormControl<DateTime>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
+      hintText: 'YYYY-MM-DD',
+      labelText: 'Enter Date of Birth');
 
   // Final Check
   static FormField acceptTerms = FormField(
@@ -267,12 +276,6 @@ class FormData extends _$FormData {
         // Personnel Info
         FormStaticData.gender.key: FormStaticData.gender.control,
         FormStaticData.genderName.key: FormStaticData.genderName.control,
-        FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
-        'date': FormControl<DateTime>(
-            // validators: [
-            //   Validators.required,
-            // ],
-            ),
         FormStaticData.currentCountry.key:
             FormStaticData.currentCountry.control,
         FormStaticData.currentState.key: FormStaticData.currentState.control,
@@ -286,6 +289,9 @@ class FormData extends _$FormData {
         // Contact Info
         FormStaticData.emailOrPhone.key: FormArray<String>(
             [FormStaticData.emailOrPhone.control..patchValue('a@g.cm')]),
+
+        FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
+        FormStaticData.dateOfEntry.key: FormStaticData.dateOfEntry.control,
 
         // Final Check
         FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,

@@ -32,7 +32,9 @@ class _FormSection2State extends ConsumerState<FormSection4> {
           formControlName: FormStaticData.dateOfBirth.fullName,
           valueAccessor: DateTimeValueAccessorCustom(),
           decoration: InputDecoration(
-            border: InputBorder.none,
+            labelText: FormStaticData.dateOfBirth.labelText,
+            hintText: FormStaticData.dateOfBirth.hintText,
+            helperText: ' ',
             suffixIcon: ReactiveDatePicker(
               formControlName: FormStaticData.dateOfBirth.fullName,
               firstDate: DateTime(1985),
@@ -40,7 +42,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
               builder: (context, picker, child) {
                 return IconButton(
                   onPressed: picker.showPicker,
-                  icon: const Icon(Icons.access_time),
+                  icon: const Icon(Icons.calendar_today),
                 );
               },
             ),
@@ -48,7 +50,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
         ),
         const SizedBox(height: 8),
         ReactiveDatePicker<DateTime>(
-          formControlName: 'date',
+          formControlName: FormStaticData.dateOfEntry.fullName,
           firstDate: DateTime(1985),
           lastDate: DateTime(2030),
           builder: (context, picker, child) {
@@ -64,7 +66,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
             return ReactiveTextField(
               onTap: (value) => picker.showPicker(),
               valueAccessor: DateTimeValueAccessor(),
-              formControlName: 'date',
+              formControlName: FormStaticData.dateOfEntry.fullName,
               readOnly: true,
               validationMessages: {
                 ValidationMessage.required: (error) =>
