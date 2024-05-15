@@ -5,6 +5,7 @@ import 'package:test_reactive_forms/data/user.dart';
 
 part 'form_data.g.dart';
 
+/// Hold all information needed to make a [FormGroup].
 class FormFieldGroup {
   final String key;
   final String name;
@@ -12,12 +13,48 @@ class FormFieldGroup {
   FormFieldGroup({required this.key, String? name}) : name = name ?? key;
 }
 
+/// Hold all information needed to make a [FormControl].
+///
+/// For [FormArray], put the type of control. Let the actual [FormGroup] to
+/// define it is an array.
+/// For [FormGroup], used [FormFieldGroup].
+///
 class FormField<T> {
+  ///  This is the name of the [FormControl], that is used by [FormGroup] to
+  /// find the control.
   final String key;
+
+  ///  In case the [FormControl] is part of group, then [fullName] will be used
+  /// instead of [key]
+  /// Example:
+  /// Create Static Data:
+  /// static FormFieldGroup user = FormFieldGroup(key: 'user');
+  /// static FormField<String> userName = FormField(
+  ///     key: 'userName',
+  ///     name: '${FormStaticData.user.name}.userName',
+  ///     control: FormControl(      ));
+  /// static FormField<String> email = FormField(
+  ///     key: 'email',
+  ///    name: '${FormStaticData.user.name}.email',
+  ///     control: FormControl<String>());
+  ///
+  /// Create a Control:
+  ///  FormStaticData.systemInfo.key: FormGroup({
+  ///   FormStaticData.usename.key: FormStaticData.usename.control,
+  ///   FormStaticData.email.key: FormStaticData.email.control,
+  /// })
+  ///
+  /// Usage:
+  /// ```dart
+  /// ReactiveTextField(
+  ///   formControlName: FormStaticData.userName.fullName,
+  ///   onSubmitted: (control) => formGroup.focus(FormStaticData.email.fullName),
+  /// )
+  /// `
   final String fullName;
+  final FormControl<T> control;
   final String labelText;
   final String hintText;
-  final FormControl<T> control;
 
   FormField({
     required this.key,
@@ -30,6 +67,44 @@ class FormField<T> {
         hintText = hintText ?? labelText ?? key;
 }
 
+/// Holds all values of [FormControl] and [FormGroup]
+///
+/// Tip: Only create [FormGroup] when partial validation is needed,
+/// or some other reason.
+/// Dont create to just visually group data. This is create unnessary problems
+/// with naming and accessing controls. Example: The form control name cannot
+/// have dot('.') in the name. Now if we have group then we have to construct
+/// fullname from parent group name's and the current name.
+///
+/// Example: No Group
+/// To create a control:
+/// 'userName': FormControl<String>()
+/// 'email': FormControl<String>()
+///
+/// Usage:
+/// ```dart
+/// ReactiveTextField(
+///   formControlName: 'userName',
+///   onSubmitted: (control) => formGroup.focus('email'),
+/// )
+/// `
+///
+/// Example: Group
+/// To create a control:
+/// 'user': FormGroup({
+///   'userName': FormControl<String>()
+///   'email': FormControl<String>()
+/// })
+
+///
+/// Usage:
+/// ```dart
+/// ReactiveTextField(
+///   formControlName: 'user.userName',
+///   onSubmitted: (control) => formGroup.focus('user.email'),
+/// )
+/// `
+/// We can avoid user.userName with no groups
 class FormStaticData {
   // System Info
   static FormFieldGroup systemInfo = FormFieldGroup(key: 'systemInfo');
