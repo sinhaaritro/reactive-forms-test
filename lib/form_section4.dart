@@ -29,6 +29,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
       padding: const EdgeInsets.all(8),
       children: [
         ReactiveTextField(
+          key: Key(FormStaticData.dateOfBirth.key),
           formControlName: FormStaticData.dateOfBirth.fullName,
           valueAccessor: DateTimeValueAccessorCustom(),
           decoration: InputDecoration(
@@ -51,7 +52,7 @@ class _FormSection2State extends ConsumerState<FormSection4> {
         const SizedBox(height: 8),
         ReactiveSwitchListTile.adaptative(
           key: Key(FormStaticData.spouse.key),
-          formControlName: FormStaticData.spouse.fullName,
+          formControlName: 'spouse',
           title: Text(FormStaticData.spouse.labelText),
         ),
         const SizedBox(height: 8),
@@ -86,6 +87,14 @@ class _FormSection2State extends ConsumerState<FormSection4> {
               ),
             );
           },
+        ),
+        const SizedBox(height: 8.0),
+        ReactiveSlider(
+          key: Key(FormStaticData.numberOfChildern.key),
+          formControlName: FormStaticData.numberOfChildern.fullName,
+          max: 100,
+          divisions: 10,
+          labelBuilder: (double value) => '${value.toStringAsFixed(2)}%',
         ),
         const SizedBox(height: 8.0),
         ReactiveFormConsumer(

@@ -230,7 +230,7 @@ class FormStaticData {
           ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
-  static FormField spouse =
+  static FormField<bool> spouse =
       FormField(key: 'spouse', control: FormControl<bool>());
   static FormField<DateTime> spouseBirth = FormField(
       key: 'spouseBirth',
@@ -241,9 +241,11 @@ class FormStaticData {
           ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
+  static FormField<double> numberOfChildern =
+      FormField(key: 'numberOfChildern', control: FormControl<double>());
 
   // Final Check
-  static FormField acceptTerms = FormField(
+  static FormField<bool> acceptTerms = FormField(
       key: 'acceptTerms',
       control: FormControl<bool>(
           // validators: [Validators.required],
@@ -295,6 +297,8 @@ class FormData extends _$FormData {
         FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
         FormStaticData.spouse.key: FormStaticData.spouse.control,
         FormStaticData.spouseBirth.key: FormStaticData.spouseBirth.control,
+        FormStaticData.numberOfChildern.key:
+            FormStaticData.numberOfChildern.control,
 
         // Final Check
         FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,
