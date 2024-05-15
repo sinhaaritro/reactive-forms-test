@@ -28,9 +28,6 @@ class FormSection1 extends ConsumerWidget {
               labelText: FormStaticData.userName.labelText,
               hintText: FormStaticData.userName.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             ),
             validationMessages: {
               ValidationMessage.required: (error) =>
@@ -49,9 +46,6 @@ class FormSection1 extends ConsumerWidget {
               labelText: FormStaticData.email.labelText,
               hintText: FormStaticData.email.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
               suffixIcon: ReactiveStatusListenableBuilder(
                 formControlName: FormStaticData.email.field,
                 builder: (context, control, child) {
@@ -81,9 +75,6 @@ class FormSection1 extends ConsumerWidget {
               labelText: FormStaticData.password.labelText,
               hintText: FormStaticData.password.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             ),
             validationMessages: {
               ValidationMessage.required: (error) =>
@@ -102,9 +93,6 @@ class FormSection1 extends ConsumerWidget {
               labelText: FormStaticData.passwordConfirm.labelText,
               hintText: FormStaticData.passwordConfirm.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             ),
             validationMessages: {
               ValidationMessage.mustMatch: (error) =>

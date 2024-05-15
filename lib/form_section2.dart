@@ -69,9 +69,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               labelText: FormStaticData.genderName.labelText,
               hintText: FormStaticData.genderName.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             ),
             validationMessages: {
               ValidationMessage.required: (error) =>
@@ -125,9 +122,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
                 hintText: FormStaticData.dateOfBirth.hintText,
                 helperText: ' ',
                 suffixIcon: suffix,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
               ),
             );
           },
@@ -139,9 +133,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
             labelText: FormStaticData.currentCountry.labelText,
             hintText: FormStaticData.currentCountry.hintText,
             helperText: ' ',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
           ),
           items: countries
               .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
@@ -157,9 +148,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
             labelText: FormStaticData.currentState.labelText,
             hintText: FormStaticData.currentState.hintText,
             helperText: ' ',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
           ),
           items: states
               .where((e) {
@@ -182,9 +170,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               labelText: FormStaticData.currentAddress1.labelText,
               hintText: FormStaticData.currentAddress1.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             )),
         const SizedBox(height: 8.0),
         ReactiveTextField(
@@ -197,9 +182,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               labelText: FormStaticData.currentAddress2.labelText,
               hintText: FormStaticData.currentAddress2.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             )),
         const SizedBox(height: 8.0),
         ReactiveTextField(
@@ -216,9 +198,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
               labelText: FormStaticData.currentPincode.labelText,
               hintText: FormStaticData.currentPincode.hintText,
               helperText: ' ',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
             )),
         const SizedBox(height: 8.0),
         ReactiveFormConsumer(

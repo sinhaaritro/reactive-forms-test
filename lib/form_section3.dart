@@ -85,9 +85,6 @@ class _FormSection3State extends ConsumerState<FormSection3> {
                         labelText: FormStaticData.emailOrPhone.labelText,
                         hintText: FormStaticData.emailOrPhone.hintText,
                         helperText: ' ',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.remove_circle),
                           onPressed: () => formArray.remove(control),
@@ -105,9 +102,6 @@ class _FormSection3State extends ConsumerState<FormSection3> {
                     labelText: FormStaticData.emailOrPhone.labelText,
                     hintText: FormStaticData.emailOrPhone.hintText,
                     helperText: ' ',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
                   ),
                 ),
               ],
