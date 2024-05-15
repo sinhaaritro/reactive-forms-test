@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:test_reactive_forms/components/page_indicator.dart';
 import 'package:test_reactive_forms/form/form_data.dart';
 import 'package:test_reactive_forms/form_section1.dart';
 import 'package:test_reactive_forms/form_section2.dart';
 import 'package:test_reactive_forms/form_section3.dart';
 import 'package:test_reactive_forms/form_section4.dart';
-import 'package:test_reactive_forms/components/page_indicator.dart';
+import 'package:test_reactive_forms/form_section5.dart';
 
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
@@ -21,7 +22,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
   late PageController _pageViewController;
   late TabController _tabController;
   int _currentPageIndex = 0;
-  final int _maxPageIndex = 4;
+  final int _maxPageIndex = 5;
 
   @override
   void initState() {
@@ -96,15 +97,22 @@ class _MyHomePageState extends ConsumerState<MyHomePage>
                   formGroup: formGroup,
                   onUpdateCurrentPageIndex: _updateCurrentPageIndex,
                 ),
-                FormSection2(formGroup: formGroup,
+                FormSection2(
+                  formGroup: formGroup,
                   onUpdateCurrentPageIndex: _updateCurrentPageIndex,
                 ),
-                FormSection3(formGroup: formGroup,
+                FormSection3(
+                  formGroup: formGroup,
                   onUpdateCurrentPageIndex: _updateCurrentPageIndex,
                 ),
-                FormSection4(formGroup: formGroup,
+                FormSection4(
+                  formGroup: formGroup,
                   onUpdateCurrentPageIndex: _updateCurrentPageIndex,
-                )
+                ),
+                FormSection5(
+                  formGroup: formGroup,
+                  onUpdateCurrentPageIndex: _updateCurrentPageIndex,
+                ),
               ],
             ),
             PageIndicator(

@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:test_reactive_forms/data/location.dart';
 import 'package:test_reactive_forms/data/user.dart';
-import 'package:test_reactive_forms/form/date_time_value_accessor.dart';
 import 'package:test_reactive_forms/form/form_data.dart';
 import 'package:test_reactive_forms/form/pincode_formatter.dart';
 import 'package:test_reactive_forms/form/pindoce_value_accessor.dart';
@@ -75,58 +74,6 @@ class _FormSection2State extends ConsumerState<FormSection2> {
                   'If other is selected then the gender must not be empty',
             }),
         const SizedBox(height: 8),
-        ReactiveTextField(
-          formControlName: FormStaticData.dateOfBirth.fullName,
-          valueAccessor: DateTimeValueAccessorCustom(),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            suffixIcon: ReactiveDatePicker(
-              formControlName: FormStaticData.dateOfBirth.fullName,
-              firstDate: DateTime(1985),
-              lastDate: DateTime.now(),
-              builder: (context, picker, child) {
-                return IconButton(
-                  onPressed: picker.showPicker,
-                  icon: const Icon(Icons.access_time),
-                );
-              },
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        ReactiveDatePicker<DateTime>(
-          formControlName: 'date',
-          firstDate: DateTime(1985),
-          lastDate: DateTime(2030),
-          builder: (context, picker, child) {
-            Widget suffix = InkWell(
-              onTap: () => picker.control.value = null,
-              child: const Icon(Icons.clear),
-            );
-
-            if (picker.value == null) {
-              suffix = const Icon(Icons.calendar_today);
-            }
-
-            return ReactiveTextField(
-              onTap: (value) => picker.showPicker(),
-              valueAccessor: DateTimeValueAccessor(),
-              formControlName: 'date',
-              readOnly: true,
-              validationMessages: {
-                ValidationMessage.required: (error) =>
-                    'If Date of Birth must be present',
-              },
-              decoration: InputDecoration(
-                labelText: FormStaticData.dateOfBirth.labelText,
-                hintText: FormStaticData.dateOfBirth.hintText,
-                helperText: ' ',
-                suffixIcon: suffix,
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 8.0),
         ReactiveDropdownField<Country>(
           formControlName: FormStaticData.currentCountry.fullName,
           decoration: InputDecoration(

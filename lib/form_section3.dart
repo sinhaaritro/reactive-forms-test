@@ -112,11 +112,7 @@ class _FormSection3State extends ConsumerState<FormSection3> {
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
-              onPressed: () {
-                print(form.valid);
-                print(form.value);
-                // onUpdateCurrentPageIndex(3);
-              },
+              onPressed: () => onUpdateCurrentPageIndex(3),
               child: const Text('Next Page'),
             );
           },
