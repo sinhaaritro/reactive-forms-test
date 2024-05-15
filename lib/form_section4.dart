@@ -19,7 +19,7 @@ class FormSection4 extends ConsumerWidget {
       children: [
         ReactiveCheckboxListTile(
           key: Key(FormStaticData.acceptTerms.key),
-          formControlName: FormStaticData.acceptTerms.name,
+          formControlName: FormStaticData.acceptTerms.fullName,
           title: const Text('Accept terms & conditions'),
         ),
         const SizedBox(height: 8),

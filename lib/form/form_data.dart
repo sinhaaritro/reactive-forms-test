@@ -1,6 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:test_reactive_forms/data/location.dart';
+import 'package:test_reactive_forms/data/user.dart';
 
 part 'form_data.g.dart';
 
@@ -13,7 +14,7 @@ class FormFieldGroup {
 
 class FormField<T> {
   final String key;
-  final String name;
+  final String fullName;
   final String labelText;
   final String hintText;
   final FormControl<T> control;
@@ -24,7 +25,7 @@ class FormField<T> {
     String? name,
     String? labelText,
     String? hintText,
-  })  : name = name ?? key,
+  })  : fullName = name ?? key,
         labelText = labelText ?? key,
         hintText = hintText ?? labelText ?? key;
 }
@@ -76,10 +77,10 @@ class FormStaticData {
 
   // Personal Info
   static FormFieldGroup personnelInfo = FormFieldGroup(key: 'personnelInfo');
-  static FormField<String> gender = FormField(
+  static FormField<Gender> gender = FormField(
       key: 'gender',
       name: '${FormStaticData.personnelInfo.name}.gender',
-      control: FormControl<String>(
+      control: FormControl<Gender>(
           // validators: [
           //   Validators.required,
           // ],
@@ -184,11 +185,15 @@ class FormData extends _$FormData {
       Future.delayed(
           const Duration(milliseconds: 1), () async => _loadData(email: email));
     }
+
+    final Map<String, AbstractControl<dynamic>> testvar = {
+      FormStaticData.userName.key: FormStaticData.userName.control
+        ..patchValue(null)
+    };
     return FormGroup(
       {
         FormStaticData.systemInfo.key: FormGroup({
-          FormStaticData.userName.key: FormStaticData.userName.control
-            ..patchValue(null),
+          ...testvar,
           FormStaticData.email.key: FormStaticData.email.control,
           FormStaticData.password.key: FormStaticData.password.control,
           FormStaticData.passwordConfirm.key:

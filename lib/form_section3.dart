@@ -60,7 +60,7 @@ class _FormSection3State extends ConsumerState<FormSection3> {
 
   @override
   Widget build(BuildContext context) {
-    final emailOrPhone = formGroup.control(FormStaticData.emailOrPhone.name)
+    final emailOrPhone = formGroup.control(FormStaticData.emailOrPhone.fullName)
         as FormArray<String>;
 
     return ListView(

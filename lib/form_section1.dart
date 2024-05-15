@@ -20,10 +20,10 @@ class FormSection1 extends ConsumerWidget {
       children: [
         ReactiveTextField(
             key: Key(FormStaticData.userName.key),
-            formControlName: FormStaticData.userName.name,
+            formControlName: FormStaticData.userName.fullName,
             textInputAction: TextInputAction.next,
             onSubmitted: (control) =>
-                formGroup.focus(FormStaticData.email.name),
+                formGroup.focus(FormStaticData.email.fullName),
             decoration: InputDecoration(
               labelText: FormStaticData.userName.labelText,
               hintText: FormStaticData.userName.hintText,
@@ -38,16 +38,16 @@ class FormSection1 extends ConsumerWidget {
         const SizedBox(height: 8),
         ReactiveTextField(
             key: Key(FormStaticData.email.key),
-            formControlName: FormStaticData.email.name,
+            formControlName: FormStaticData.email.fullName,
             textInputAction: TextInputAction.next,
             onSubmitted: (control) =>
-                formGroup.focus(FormStaticData.password.name),
+                formGroup.focus(FormStaticData.password.fullName),
             decoration: InputDecoration(
               labelText: FormStaticData.email.labelText,
               hintText: FormStaticData.email.hintText,
               helperText: ' ',
               suffixIcon: ReactiveStatusListenableBuilder(
-                formControlName: FormStaticData.email.name,
+                formControlName: FormStaticData.email.fullName,
                 builder: (context, control, child) {
                   return control.pending
                       ? const CircularProgressIndicator()
@@ -66,10 +66,10 @@ class FormSection1 extends ConsumerWidget {
         const SizedBox(height: 8),
         ReactiveTextField(
             key: Key(FormStaticData.password.key),
-            formControlName: FormStaticData.password.name,
+            formControlName: FormStaticData.password.fullName,
             textInputAction: TextInputAction.next,
             onSubmitted: (control) =>
-                formGroup.focus(FormStaticData.passwordConfirm.name),
+                formGroup.focus(FormStaticData.passwordConfirm.fullName),
             // obscureText: true,
             decoration: InputDecoration(
               labelText: FormStaticData.password.labelText,
@@ -85,7 +85,7 @@ class FormSection1 extends ConsumerWidget {
         const SizedBox(height: 8),
         ReactiveTextField(
             key: Key(FormStaticData.passwordConfirm.key),
-            formControlName: FormStaticData.passwordConfirm.name,
+            formControlName: FormStaticData.passwordConfirm.fullName,
             textInputAction: TextInputAction.done,
             // onSubmitted: (control) => formGroup.focus('submit-section-1'),
             // obscureText: true,
