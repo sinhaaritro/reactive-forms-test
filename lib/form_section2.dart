@@ -37,33 +37,32 @@ class _FormSection2State extends ConsumerState<FormSection2> {
           key: Key(Gender.male.id),
           title: Text(Gender.male.name),
           value: Gender.male,
-          formControlName: FormStaticData.gender.field,
+          formControlName: FormStaticData.gender.name,
           onChanged: (control) => formGroup
-              .control(FormStaticData.genderName.field)
+              .control(FormStaticData.genderName.name)
               .markAsDisabled(),
         ),
         ReactiveRadioListTile<Gender>(
           key: Key(Gender.female.id),
           title: Text(Gender.female.name),
           value: Gender.female,
-          formControlName: FormStaticData.gender.field,
+          formControlName: FormStaticData.gender.name,
           onChanged: (control) => formGroup
-              .control(FormStaticData.genderName.field)
+              .control(FormStaticData.genderName.name)
               .markAsDisabled(),
         ),
         ReactiveRadioListTile<Gender>(
           key: Key(Gender.others.id),
           title: Text(Gender.others.name),
           value: Gender.others,
-          formControlName: FormStaticData.gender.field,
-          onChanged: (control) => formGroup
-              .control(FormStaticData.genderName.field)
-              .markAsEnabled(),
+          formControlName: FormStaticData.gender.name,
+          onChanged: (control) =>
+              formGroup.control(FormStaticData.genderName.name).markAsEnabled(),
         ),
         const SizedBox(height: 8),
         ReactiveTextField(
             key: Key(FormStaticData.genderName.key),
-            formControlName: FormStaticData.genderName.field,
+            formControlName: FormStaticData.genderName.name,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               labelText: FormStaticData.genderName.labelText,
@@ -76,12 +75,12 @@ class _FormSection2State extends ConsumerState<FormSection2> {
             }),
         const SizedBox(height: 8),
         ReactiveTextField(
-          formControlName: FormStaticData.dateOfBirth.field,
+          formControlName: FormStaticData.dateOfBirth.name,
           valueAccessor: DateTimeValueAccessorCustom(),
           decoration: InputDecoration(
             border: InputBorder.none,
             suffixIcon: ReactiveDatePicker(
-              formControlName: FormStaticData.dateOfBirth.field,
+              formControlName: FormStaticData.dateOfBirth.name,
               firstDate: DateTime(1985),
               lastDate: DateTime.now(),
               builder: (context, picker, child) {
@@ -128,7 +127,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         ),
         const SizedBox(height: 8.0),
         ReactiveDropdownField<Country>(
-          formControlName: FormStaticData.currentCountry.field,
+          formControlName: FormStaticData.currentCountry.name,
           decoration: InputDecoration(
             labelText: FormStaticData.currentCountry.labelText,
             hintText: FormStaticData.currentCountry.hintText,
@@ -137,13 +136,12 @@ class _FormSection2State extends ConsumerState<FormSection2> {
           items: countries
               .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
               .toList(),
-          onChanged: (control) => setState(() => formGroup
-              .control(FormStaticData.currentState.field)
-              .value = null),
+          onChanged: (control) => setState(() =>
+              formGroup.control(FormStaticData.currentState.name).value = null),
         ),
         const SizedBox(height: 8.0),
         ReactiveDropdownField<CountryState>(
-          formControlName: FormStaticData.currentState.field,
+          formControlName: FormStaticData.currentState.name,
           decoration: InputDecoration(
             labelText: FormStaticData.currentState.labelText,
             hintText: FormStaticData.currentState.hintText,
@@ -152,7 +150,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
           items: states
               .where((e) {
                 Country? selectedCountry = formGroup
-                    .control(FormStaticData.currentCountry.field)
+                    .control(FormStaticData.currentCountry.name)
                     .value as Country?;
                 return selectedCountry == null || e.country == selectedCountry;
               })
@@ -162,10 +160,10 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         const SizedBox(height: 8.0),
         ReactiveTextField(
             key: Key(FormStaticData.currentAddress1.key),
-            formControlName: FormStaticData.currentAddress1.field,
+            formControlName: FormStaticData.currentAddress1.name,
             textInputAction: TextInputAction.next,
             onSubmitted: (control) =>
-                formGroup.focus(FormStaticData.currentAddress2.field),
+                formGroup.focus(FormStaticData.currentAddress2.name),
             decoration: InputDecoration(
               labelText: FormStaticData.currentAddress1.labelText,
               hintText: FormStaticData.currentAddress1.hintText,
@@ -174,10 +172,10 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         const SizedBox(height: 8.0),
         ReactiveTextField(
             key: Key(FormStaticData.currentAddress2.key),
-            formControlName: FormStaticData.currentAddress2.field,
+            formControlName: FormStaticData.currentAddress2.name,
             textInputAction: TextInputAction.next,
             onSubmitted: (control) =>
-                formGroup.focus(FormStaticData.currentPincode.field),
+                formGroup.focus(FormStaticData.currentPincode.name),
             decoration: InputDecoration(
               labelText: FormStaticData.currentAddress2.labelText,
               hintText: FormStaticData.currentAddress2.hintText,
@@ -186,7 +184,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         const SizedBox(height: 8.0),
         ReactiveTextField(
             key: Key(FormStaticData.currentPincode.key),
-            formControlName: FormStaticData.currentPincode.field,
+            formControlName: FormStaticData.currentPincode.name,
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             valueAccessor: PincodeValueAccessor(),

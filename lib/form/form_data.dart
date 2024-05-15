@@ -1,105 +1,179 @@
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:test_reactive_forms/data/location.dart';
-import 'package:test_reactive_forms/data/user.dart';
 
 part 'form_data.g.dart';
 
-class FormField {
+class FormFieldGroup {
   final String key;
-  final String field;
+  final String name;
+
+  FormFieldGroup({required this.key, String? name}) : name = name ?? key;
+}
+
+class FormField<T> {
+  final String key;
+  final String name;
   final String labelText;
   final String hintText;
+  final FormControl<T> control;
 
-  FormField(
-      {required this.key, String? field, String? labelText, String? hintText})
-      : field = field ?? key,
+  FormField({
+    required this.key,
+    required this.control,
+    String? name,
+    String? labelText,
+    String? hintText,
+  })  : name = name ?? key,
         labelText = labelText ?? key,
         hintText = hintText ?? labelText ?? key;
 }
 
 class FormStaticData {
   // System Info
-  static FormField systemInfo = FormField(key: 'systemInfo');
-  static FormField userName = FormField(
+  static FormFieldGroup systemInfo = FormFieldGroup(key: 'systemInfo');
+  static FormField<String> userName = FormField(
       key: 'userName',
-      field: '${FormStaticData.systemInfo.field}.userName',
+      name: '${FormStaticData.systemInfo.name}.userName',
+      control: FormControl(
+          // validators: [
+          //   Validators.required,
+          //   Validators.minLength(3),
+          // ],
+          ),
       hintText: 'Enter username',
       labelText: 'Username');
-  static FormField email = FormField(
+  static FormField<String> email = FormField(
       key: 'email',
-      field: '${FormStaticData.systemInfo.field}.email',
+      name: '${FormStaticData.systemInfo.name}.email',
+      control: FormControl<String>(
+          // validators: [
+          //   Validators.required,
+          //   Validators.email,
+          // ],
+          // asyncValidators: [UniqueEmailAsyncValidator()],
+          // asyncValidatorsDebounceTime: 1000,
+          ),
       hintText: 'Enter email',
       labelText: 'Email');
-  static FormField password = FormField(
+  static FormField<String> password = FormField(
       key: 'password',
-      field: '${FormStaticData.systemInfo.field}.password',
+      name: '${FormStaticData.systemInfo.name}.password',
+      control: FormControl<String>(
+          // validators: [
+          //   Validators.required,
+          //   Validators.minLength(2),
+          // ],
+          ),
       hintText: 'Enter password',
       labelText: 'Password');
-  static FormField passwordConfirm = FormField(
+  static FormField<String> passwordConfirm = FormField(
       key: 'passwordConfirm',
-      field: '${FormStaticData.systemInfo.field}.passwordConfirm',
+      control: FormControl<String>(),
+      name: '${FormStaticData.systemInfo.name}.passwordConfirm',
       hintText: 'Enter password again',
       labelText: 'Confirm Password');
 
   // Personal Info
-  static FormField personnelInfo = FormField(key: 'personnelInfo');
-  static FormField gender = FormField(
-      key: 'gender', field: '${FormStaticData.personnelInfo.field}.gender');
-  static FormField genderName = FormField(
+  static FormFieldGroup personnelInfo = FormFieldGroup(key: 'personnelInfo');
+  static FormField<String> gender = FormField(
+      key: 'gender',
+      name: '${FormStaticData.personnelInfo.name}.gender',
+      control: FormControl<String>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ));
+  static FormField<String> genderName = FormField(
       key: 'genderName',
-      field: '${FormStaticData.personnelInfo.field}.genderName',
+      name: '${FormStaticData.personnelInfo.name}.genderName',
+      control: FormControl<String>(
+          // disabled: true,
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
       hintText: 'Enter Gender Name',
       labelText: 'Enter Gender Name');
-  static FormField dateOfBirth = FormField(
+  static FormField<DateTime> dateOfBirth = FormField(
       key: 'dateOfBirth',
-      field: '${FormStaticData.personnelInfo.field}.dateOfBirth',
+      name: '${FormStaticData.personnelInfo.name}.dateOfBirth',
+      control: FormControl<DateTime>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
-  static FormField currentCountry = FormField(
+  static FormField<Country> currentCountry = FormField(
       key: 'currentCountry',
-      field: '${FormStaticData.personnelInfo.field}.currentCountry',
+      name: '${FormStaticData.personnelInfo.name}.currentCountry',
+      control: FormControl<Country>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
       hintText: 'Enter Current Country',
       labelText: 'Enter Current Country');
-  static FormField currentState = FormField(
+  static FormField<CountryState> currentState = FormField(
       key: 'currentState',
-      field: '${FormStaticData.personnelInfo.field}.currentState',
+      name: '${FormStaticData.personnelInfo.name}.currentState',
+      control: FormControl<CountryState>(
+          // validators: [
+          //   Validators.required,
+          // ],
+          ),
       hintText: 'Enter Current State',
       labelText: 'Enter Current State');
-  static FormField currentAddress1 = FormField(
+  static FormField<String> currentAddress1 = FormField(
       key: 'currentAddress1',
-      field: '${FormStaticData.personnelInfo.field}.currentAddress1',
+      name: '${FormStaticData.personnelInfo.name}.currentAddress1',
+      control: FormControl<String>(),
       hintText: 'Enter Address Line 1',
       labelText: 'Enter Address Line 1');
-  static FormField currentAddress2 = FormField(
+  static FormField<String> currentAddress2 = FormField(
       key: 'currentAddress2',
-      field: '${FormStaticData.personnelInfo.field}.currentAddress2',
+      name: '${FormStaticData.personnelInfo.name}.currentAddress2',
+      control: FormControl<String>(),
       hintText: 'Enter Address Line 2',
       labelText: 'Enter Address Line 2');
-  static FormField currentPincode = FormField(
+  static FormField<int> currentPincode = FormField(
       key: 'currentPincode',
-      field: '${FormStaticData.personnelInfo.field}.currentPincode',
+      name: '${FormStaticData.personnelInfo.name}.currentPincode',
+      control: FormControl<int>(),
       hintText: 'Enter current Pincode',
       labelText: 'Enter current Pincode');
 
   // Contact Info
-  static FormField contactInfo = FormField(key: 'contactInfo');
-  static FormField emailOrPhone = FormField(
+  static FormFieldGroup contactInfo = FormFieldGroup(key: 'contactInfo');
+  static FormField<String> emailOrPhone = FormField(
       key: 'emailOrPhone',
-      field: '${FormStaticData.contactInfo.field}.emailOrPhone',
+      name: '${FormStaticData.contactInfo.name}.emailOrPhone',
+      control: FormControl<String>(
+          // validators: [
+          //   Validators.composeOR(
+          //     [
+          //       Validators.email,
+          //       Validators.pattern(r'/\d/g'),
+          //     ],
+          //   )
+          ),
       hintText: 'Enter alternate email or phone number',
       labelText: 'Enter alternate email or phone number');
 
   // Family Info
-  static FormField familyInfo = FormField(key: 'familyInfo');
+  static FormFieldGroup familyInfo = FormFieldGroup(key: 'familyInfo');
+
   // Final Check
-  static FormField finalCheck = FormField(key: 'finalCheck');
+  static FormFieldGroup finalCheck = FormFieldGroup(key: 'finalCheck');
   static FormField acceptTerms = FormField(
       key: 'acceptTerms',
-      field: '${FormStaticData.finalCheck.field}.acceptTerms');
+      name: '${FormStaticData.finalCheck.name}.acceptTerms',
+      control: FormControl<bool>(
+          // validators: [Validators.required],
+          ));
   static const String firstNameKey = 'firstName';
   static const String lastNameKey = 'lastName';
-  static const String emailOrPhoneKey = 'email2phone';
 }
 
 @riverpod
@@ -108,89 +182,46 @@ class FormData extends _$FormData {
   FormGroup build({String? email}) {
     // // Forced Delay to make sure the call happens. Shouldnt be a problem when
     // // we are dealing with actual data with Async Call
-    // if (email!=null)
-    // Future.delayed(const Duration(milliseconds: 1), () async => _loadData(email:email));
+    if (email != null) {
+      Future.delayed(
+          const Duration(milliseconds: 1), () async => _loadData(email: email));
+    }
     return FormGroup(
       {
         FormStaticData.systemInfo.key: FormGroup({
-          FormStaticData.userName.key: FormControl<String>(
-              // validators: [
-              //   Validators.required,
-              //   Validators.minLength(3),
-              // ],
-              ),
-          FormStaticData.email.key: FormControl<String>(
-              // validators: [
-              //   Validators.required,
-              //   Validators.email,
-              // ],
-              // asyncValidators: [UniqueEmailAsyncValidator()],
-              // asyncValidatorsDebounceTime: 1000,
-              ),
-          FormStaticData.password.key: FormControl<String>(
-              // validators: [
-              //   Validators.required,
-              //   Validators.minLength(2),
-              // ],
-              ),
-          FormStaticData.passwordConfirm.key: FormControl<String>(),
+          FormStaticData.userName.key: FormStaticData.userName.control
+            ..patchValue(null),
+          FormStaticData.email.key: FormStaticData.email.control,
+          FormStaticData.password.key: FormStaticData.password.control,
+          FormStaticData.passwordConfirm.key:
+              FormStaticData.passwordConfirm.control,
         }),
         FormStaticData.personnelInfo.key: FormGroup({
-          FormStaticData.gender.key: FormControl<Gender>(
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
-          FormStaticData.genderName.key: FormControl<String>(
-              // disabled: true,
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
-          FormStaticData.dateOfBirth.key: FormControl<DateTime>(
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
+          FormStaticData.gender.key: FormStaticData.gender.control,
+          FormStaticData.genderName.key: FormStaticData.genderName.control,
+          FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
           'date': FormControl<DateTime>(
               // validators: [
               //   Validators.required,
               // ],
               ),
-          FormStaticData.currentCountry.key: FormControl<Country>(
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
-          FormStaticData.currentState.key: FormControl<CountryState>(
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
-          FormStaticData.currentAddress1.key: FormControl<String>(),
-          FormStaticData.currentAddress2.key: FormControl<String>(),
-          FormStaticData.currentPincode.key: FormControl<int>(),
+          FormStaticData.currentCountry.key:
+              FormStaticData.currentCountry.control,
+          FormStaticData.currentState.key: FormStaticData.currentState.control,
+          FormStaticData.currentAddress1.key:
+              FormStaticData.currentAddress1.control,
+          FormStaticData.currentAddress2.key:
+              FormStaticData.currentAddress2.control,
+          FormStaticData.currentPincode.key:
+              FormStaticData.currentPincode.control,
         }),
         FormStaticData.contactInfo.key: FormGroup({
-          FormStaticData.emailOrPhone.key: FormArray<String>([
-            FormControl<String>(value: 'a@g.cm'),
-          ]),
+          FormStaticData.emailOrPhone.key: FormArray<String>(
+              [FormStaticData.emailOrPhone.control..patchValue('a@g.cm')]),
         }),
         FormStaticData.finalCheck.key: FormGroup({
-          FormStaticData.acceptTerms.key: FormControl<bool>(
-              // validators: [Validators.required],
-              ),
+          FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,
         }),
-        FormStaticData.emailOrPhoneKey: FormControl<String>(
-            // validators: [
-            //   Validators.composeOR(
-            //     [
-            //       Validators.email,
-            //       Validators.pattern(r'/\d/g'),
-            //     ],
-            //   )
-            // ],
-            ),
       },
       // validators: [
       //   Validators.mustMatch(FormStaticData.password.field,
@@ -199,8 +230,9 @@ class FormData extends _$FormData {
     );
   }
 
-  // FutureOr<void> _loadData({String? email}) async {
-  // }
+  FutureOr<void> _loadData({String? email}) async {
+    state = FormGroup({});
+  }
 
   // void resetForm({String? email}) {
   //   _loadData(email:email);

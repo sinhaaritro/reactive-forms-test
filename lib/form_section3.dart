@@ -46,7 +46,7 @@ class _FormSection3State extends ConsumerState<FormSection3> {
 
   _addNewControlToArray(FormArray<String> formArray) {
     if (_isNewFieldReady == true) {
-      formArray.add(FormControl<String>());
+      formArray.add(FormStaticData.emailOrPhone.control);
       Future.delayed(const Duration(milliseconds: 50), () {
         formArray.controls.last.value = _textEditingController.text;
         _textEditingController.text = '';
@@ -60,7 +60,7 @@ class _FormSection3State extends ConsumerState<FormSection3> {
 
   @override
   Widget build(BuildContext context) {
-    final emailOrPhone = formGroup.control(FormStaticData.emailOrPhone.field)
+    final emailOrPhone = formGroup.control(FormStaticData.emailOrPhone.name)
         as FormArray<String>;
 
     return ListView(
