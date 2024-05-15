@@ -172,8 +172,6 @@ class FormStaticData {
       control: FormControl<bool>(
           // validators: [Validators.required],
           ));
-  static const String firstNameKey = 'firstName';
-  static const String lastNameKey = 'lastName';
 }
 
 @riverpod
