@@ -59,10 +59,10 @@ class FormField<T> {
   FormField({
     required this.key,
     required this.control,
-    String? name,
+    String? fullName,
     String? labelText,
     String? hintText,
-  })  : fullName = name ?? key,
+  })  : fullName = fullName ?? key,
         labelText = labelText ?? key,
         hintText = hintText ?? labelText ?? key;
 }
@@ -110,7 +110,7 @@ class FormStaticData {
   static FormFieldGroup systemInfo = FormFieldGroup(key: 'systemInfo');
   static FormField<String> userName = FormField(
       key: 'userName',
-      name: '${FormStaticData.systemInfo.name}.userName',
+      fullName: '${FormStaticData.systemInfo.name}.userName',
       control: FormControl(
           // validators: [
           //   Validators.required,
@@ -121,7 +121,7 @@ class FormStaticData {
       labelText: 'Username');
   static FormField<String> email = FormField(
       key: 'email',
-      name: '${FormStaticData.systemInfo.name}.email',
+      fullName: '${FormStaticData.systemInfo.name}.email',
       control: FormControl<String>(
           // validators: [
           //   Validators.required,
@@ -134,7 +134,7 @@ class FormStaticData {
       labelText: 'Email');
   static FormField<String> password = FormField(
       key: 'password',
-      name: '${FormStaticData.systemInfo.name}.password',
+      fullName: '${FormStaticData.systemInfo.name}.password',
       control: FormControl<String>(
           // validators: [
           //   Validators.required,
@@ -146,7 +146,7 @@ class FormStaticData {
   static FormField<String> passwordConfirm = FormField(
       key: 'passwordConfirm',
       control: FormControl<String>(),
-      name: '${FormStaticData.systemInfo.name}.passwordConfirm',
+      fullName: '${FormStaticData.systemInfo.name}.passwordConfirm',
       hintText: 'Enter password again',
       labelText: 'Confirm Password');
 
@@ -154,7 +154,7 @@ class FormStaticData {
   static FormFieldGroup personnelInfo = FormFieldGroup(key: 'personnelInfo');
   static FormField<Gender> gender = FormField(
       key: 'gender',
-      name: '${FormStaticData.personnelInfo.name}.gender',
+      fullName: '${FormStaticData.personnelInfo.name}.gender',
       control: FormControl<Gender>(
           // validators: [
           //   Validators.required,
@@ -162,7 +162,7 @@ class FormStaticData {
           ));
   static FormField<String> genderName = FormField(
       key: 'genderName',
-      name: '${FormStaticData.personnelInfo.name}.genderName',
+      fullName: '${FormStaticData.personnelInfo.name}.genderName',
       control: FormControl<String>(
           // disabled: true,
           // validators: [
@@ -173,7 +173,7 @@ class FormStaticData {
       labelText: 'Enter Gender Name');
   static FormField<DateTime> dateOfBirth = FormField(
       key: 'dateOfBirth',
-      name: '${FormStaticData.personnelInfo.name}.dateOfBirth',
+      fullName: '${FormStaticData.personnelInfo.name}.dateOfBirth',
       control: FormControl<DateTime>(
           // validators: [
           //   Validators.required,
@@ -183,7 +183,7 @@ class FormStaticData {
       labelText: 'Enter Date of Birth');
   static FormField<Country> currentCountry = FormField(
       key: 'currentCountry',
-      name: '${FormStaticData.personnelInfo.name}.currentCountry',
+      fullName: '${FormStaticData.personnelInfo.name}.currentCountry',
       control: FormControl<Country>(
           // validators: [
           //   Validators.required,
@@ -193,7 +193,7 @@ class FormStaticData {
       labelText: 'Enter Current Country');
   static FormField<CountryState> currentState = FormField(
       key: 'currentState',
-      name: '${FormStaticData.personnelInfo.name}.currentState',
+      fullName: '${FormStaticData.personnelInfo.name}.currentState',
       control: FormControl<CountryState>(
           // validators: [
           //   Validators.required,
@@ -203,19 +203,19 @@ class FormStaticData {
       labelText: 'Enter Current State');
   static FormField<String> currentAddress1 = FormField(
       key: 'currentAddress1',
-      name: '${FormStaticData.personnelInfo.name}.currentAddress1',
+      fullName: '${FormStaticData.personnelInfo.name}.currentAddress1',
       control: FormControl<String>(),
       hintText: 'Enter Address Line 1',
       labelText: 'Enter Address Line 1');
   static FormField<String> currentAddress2 = FormField(
       key: 'currentAddress2',
-      name: '${FormStaticData.personnelInfo.name}.currentAddress2',
+      fullName: '${FormStaticData.personnelInfo.name}.currentAddress2',
       control: FormControl<String>(),
       hintText: 'Enter Address Line 2',
       labelText: 'Enter Address Line 2');
   static FormField<int> currentPincode = FormField(
       key: 'currentPincode',
-      name: '${FormStaticData.personnelInfo.name}.currentPincode',
+      fullName: '${FormStaticData.personnelInfo.name}.currentPincode',
       control: FormControl<int>(),
       hintText: 'Enter current Pincode',
       labelText: 'Enter current Pincode');
@@ -224,7 +224,7 @@ class FormStaticData {
   static FormFieldGroup contactInfo = FormFieldGroup(key: 'contactInfo');
   static FormField<String> emailOrPhone = FormField(
       key: 'emailOrPhone',
-      name: '${FormStaticData.contactInfo.name}.emailOrPhone',
+      fullName: '${FormStaticData.contactInfo.name}.emailOrPhone',
       control: FormControl<String>(
           // validators: [
           //   Validators.composeOR(
@@ -244,7 +244,7 @@ class FormStaticData {
   static FormFieldGroup finalCheck = FormFieldGroup(key: 'finalCheck');
   static FormField acceptTerms = FormField(
       key: 'acceptTerms',
-      name: '${FormStaticData.finalCheck.name}.acceptTerms',
+      fullName: '${FormStaticData.finalCheck.name}.acceptTerms',
       control: FormControl<bool>(
           // validators: [Validators.required],
           ));
