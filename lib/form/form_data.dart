@@ -20,12 +20,14 @@ class FormFieldGroup {
 /// For [FormGroup], used [FormFieldGroup].
 ///
 class FormField<T> {
-  ///  This is the name of the [FormControl], that is used by [FormGroup] to
+  /// This is the name of the [FormControl], that is used by [FormGroup] to
   /// find the control.
   final String key;
 
-  ///  In case the [FormControl] is part of group, then [fullName] will be used
-  /// instead of [key]
+  /// Control Name to use to find control, by default it will be the [key].
+  /// But if the control is nested under [FormGroup], then use [fullName]
+  /// to manually add the full name of the control with parent name
+  ///
   /// Example:
   /// Create Static Data:
   /// static FormFieldGroup user = FormFieldGroup(key: 'user');
@@ -151,10 +153,8 @@ class FormStaticData {
       labelText: 'Confirm Password');
 
   // Personal Info
-  static FormFieldGroup personnelInfo = FormFieldGroup(key: 'personnelInfo');
   static FormField<Gender> gender = FormField(
       key: 'gender',
-      fullName: '${FormStaticData.personnelInfo.name}.gender',
       control: FormControl<Gender>(
           // validators: [
           //   Validators.required,
@@ -162,7 +162,6 @@ class FormStaticData {
           ));
   static FormField<String> genderName = FormField(
       key: 'genderName',
-      fullName: '${FormStaticData.personnelInfo.name}.genderName',
       control: FormControl<String>(
           // disabled: true,
           // validators: [
@@ -173,7 +172,6 @@ class FormStaticData {
       labelText: 'Enter Gender Name');
   static FormField<DateTime> dateOfBirth = FormField(
       key: 'dateOfBirth',
-      fullName: '${FormStaticData.personnelInfo.name}.dateOfBirth',
       control: FormControl<DateTime>(
           // validators: [
           //   Validators.required,
@@ -183,7 +181,6 @@ class FormStaticData {
       labelText: 'Enter Date of Birth');
   static FormField<Country> currentCountry = FormField(
       key: 'currentCountry',
-      fullName: '${FormStaticData.personnelInfo.name}.currentCountry',
       control: FormControl<Country>(
           // validators: [
           //   Validators.required,
@@ -193,7 +190,6 @@ class FormStaticData {
       labelText: 'Enter Current Country');
   static FormField<CountryState> currentState = FormField(
       key: 'currentState',
-      fullName: '${FormStaticData.personnelInfo.name}.currentState',
       control: FormControl<CountryState>(
           // validators: [
           //   Validators.required,
@@ -203,28 +199,23 @@ class FormStaticData {
       labelText: 'Enter Current State');
   static FormField<String> currentAddress1 = FormField(
       key: 'currentAddress1',
-      fullName: '${FormStaticData.personnelInfo.name}.currentAddress1',
       control: FormControl<String>(),
       hintText: 'Enter Address Line 1',
       labelText: 'Enter Address Line 1');
   static FormField<String> currentAddress2 = FormField(
       key: 'currentAddress2',
-      fullName: '${FormStaticData.personnelInfo.name}.currentAddress2',
       control: FormControl<String>(),
       hintText: 'Enter Address Line 2',
       labelText: 'Enter Address Line 2');
   static FormField<int> currentPincode = FormField(
       key: 'currentPincode',
-      fullName: '${FormStaticData.personnelInfo.name}.currentPincode',
       control: FormControl<int>(),
       hintText: 'Enter current Pincode',
       labelText: 'Enter current Pincode');
 
   // Contact Info
-  static FormFieldGroup contactInfo = FormFieldGroup(key: 'contactInfo');
   static FormField<String> emailOrPhone = FormField(
       key: 'emailOrPhone',
-      fullName: '${FormStaticData.contactInfo.name}.emailOrPhone',
       control: FormControl<String>(
           // validators: [
           //   Validators.composeOR(
@@ -241,10 +232,8 @@ class FormStaticData {
   static FormFieldGroup familyInfo = FormFieldGroup(key: 'familyInfo');
 
   // Final Check
-  static FormFieldGroup finalCheck = FormFieldGroup(key: 'finalCheck');
   static FormField acceptTerms = FormField(
       key: 'acceptTerms',
-      fullName: '${FormStaticData.finalCheck.name}.acceptTerms',
       control: FormControl<bool>(
           // validators: [Validators.required],
           ));
@@ -274,32 +263,32 @@ class FormData extends _$FormData {
           FormStaticData.passwordConfirm.key:
               FormStaticData.passwordConfirm.control,
         }),
-        FormStaticData.personnelInfo.key: FormGroup({
-          FormStaticData.gender.key: FormStaticData.gender.control,
-          FormStaticData.genderName.key: FormStaticData.genderName.control,
-          FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
-          'date': FormControl<DateTime>(
-              // validators: [
-              //   Validators.required,
-              // ],
-              ),
-          FormStaticData.currentCountry.key:
-              FormStaticData.currentCountry.control,
-          FormStaticData.currentState.key: FormStaticData.currentState.control,
-          FormStaticData.currentAddress1.key:
-              FormStaticData.currentAddress1.control,
-          FormStaticData.currentAddress2.key:
-              FormStaticData.currentAddress2.control,
-          FormStaticData.currentPincode.key:
-              FormStaticData.currentPincode.control,
-        }),
-        FormStaticData.contactInfo.key: FormGroup({
-          FormStaticData.emailOrPhone.key: FormArray<String>(
-              [FormStaticData.emailOrPhone.control..patchValue('a@g.cm')]),
-        }),
-        FormStaticData.finalCheck.key: FormGroup({
-          FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,
-        }),
+
+        // Personnel Info
+        FormStaticData.gender.key: FormStaticData.gender.control,
+        FormStaticData.genderName.key: FormStaticData.genderName.control,
+        FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
+        'date': FormControl<DateTime>(
+            // validators: [
+            //   Validators.required,
+            // ],
+            ),
+        FormStaticData.currentCountry.key:
+            FormStaticData.currentCountry.control,
+        FormStaticData.currentState.key: FormStaticData.currentState.control,
+        FormStaticData.currentAddress1.key:
+            FormStaticData.currentAddress1.control,
+        FormStaticData.currentAddress2.key:
+            FormStaticData.currentAddress2.control,
+        FormStaticData.currentPincode.key:
+            FormStaticData.currentPincode.control,
+
+        // Contact Info
+        FormStaticData.emailOrPhone.key: FormArray<String>(
+            [FormStaticData.emailOrPhone.control..patchValue('a@g.cm')]),
+
+        // Final Check
+        FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,
       },
       // validators: [
       //   Validators.mustMatch(FormStaticData.password.field,

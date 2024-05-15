@@ -95,7 +95,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
         ),
         const SizedBox(height: 8),
         ReactiveDatePicker<DateTime>(
-          formControlName: 'personnelInfo.date',
+          formControlName: 'date',
           firstDate: DateTime(1985),
           lastDate: DateTime(2030),
           builder: (context, picker, child) {
@@ -111,7 +111,7 @@ class _FormSection2State extends ConsumerState<FormSection2> {
             return ReactiveTextField(
               onTap: (value) => picker.showPicker(),
               valueAccessor: DateTimeValueAccessor(),
-              formControlName: 'personnelInfo.date',
+              formControlName: 'date',
               readOnly: true,
               validationMessages: {
                 ValidationMessage.required: (error) =>
