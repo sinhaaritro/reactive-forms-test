@@ -248,8 +248,8 @@ class FormStaticData {
   static FormField<bool> acceptTerms = FormField(
       key: 'acceptTerms',
       control: FormControl<bool>(
-          // validators: [Validators.required],
-          ));
+        validators: [Validators.requiredTrue],
+      ));
 }
 
 @riverpod

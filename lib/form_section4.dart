@@ -92,9 +92,24 @@ class _FormSection2State extends ConsumerState<FormSection4> {
         ReactiveSlider(
           key: Key(FormStaticData.numberOfChildern.key),
           formControlName: FormStaticData.numberOfChildern.fullName,
-          max: 100,
+          max: 10,
           divisions: 10,
-          labelBuilder: (double value) => '${value.toStringAsFixed(2)}%',
+          labelBuilder: (double value) =>
+              '${value.toStringAsFixed(2)} children',
+        ),
+        ReactiveValueListenableBuilder(
+          formControlName: FormStaticData.numberOfChildern.fullName,
+          builder: (context, control, child) {
+            switch (control.value) {
+              case null:
+                return const Text("No children");
+              case 1:
+                return const Text("Number of child is 1");
+              default:
+                return Text(
+                    "Number of children is ${(control.value as double).toInt()}");
+            }
+          },
         ),
         const SizedBox(height: 8.0),
         ReactiveFormConsumer(

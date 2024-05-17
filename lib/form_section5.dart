@@ -22,12 +22,23 @@ class FormSection5 extends ConsumerWidget {
           formControlName: FormStaticData.acceptTerms.fullName,
           title: const Text('Accept terms & conditions'),
         ),
+        ReactiveStatusListenableBuilder(
+          formControlName: FormStaticData.acceptTerms.fullName,
+          builder: (context, control, child) {
+            return control.invalid && (control.dirty || control.touched)
+                ? const Text("required true")
+                : Container();
+          },
+        ),
         const SizedBox(height: 8),
         ReactiveFormConsumer(
           builder: (context, form, child) {
             return ElevatedButton(
               onPressed: () {
-                print(form.value);
+                form.control(FormStaticData.acceptTerms.fullName).markAsDirty();
+
+                // print(form.valid);
+                // print(form.value);
                 if (form.valid) {
                   const snackBar = SnackBar(
                     content: Text('Valid Form'),
