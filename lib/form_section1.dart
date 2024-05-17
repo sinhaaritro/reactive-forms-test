@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:test_reactive_forms/form/extension/validation_message_extension.dart';
 import 'package:test_reactive_forms/form/form_data.dart';
 
 class FormSection1 extends ConsumerWidget {
@@ -60,8 +61,8 @@ class FormSection1 extends ConsumerWidget {
                   'The email must not be empty',
               ValidationMessage.email: (error) =>
                   'The email value must be a valid email',
-              // TODO : Add Unique Email Validator
-              'unique': (_) => 'This email is already in use'
+              CustomValidationMessage.uniqueAsyncEmail: (error) =>
+                  'This email is already in use'
             }),
         const SizedBox(height: 8),
         ReactiveTextField(

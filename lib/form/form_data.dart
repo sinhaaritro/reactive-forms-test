@@ -2,6 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:test_reactive_forms/data/location.dart';
 import 'package:test_reactive_forms/data/user.dart';
+import 'package:test_reactive_forms/form/extension/validators_extention.dart';
 
 part 'form_data.g.dart';
 
@@ -114,24 +115,24 @@ class FormStaticData {
       key: 'userName',
       fullName: '${FormStaticData.systemInfo.name}.userName',
       control: FormControl(
-          // validators: [
-          //   Validators.required,
-          //   Validators.minLength(3),
-          // ],
-          ),
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+        ],
+      ),
       hintText: 'Enter username',
       labelText: 'Username');
   static FormField<String> email = FormField(
       key: 'email',
       fullName: '${FormStaticData.systemInfo.name}.email',
       control: FormControl<String>(
-          // validators: [
-          //   Validators.required,
-          //   Validators.email,
-          // ],
-          // asyncValidators: [UniqueEmailAsyncValidator()],
-          // asyncValidatorsDebounceTime: 1000,
-          ),
+        validators: [
+          Validators.required,
+          Validators.email,
+        ],
+        asyncValidators: [CustomValidators.uniqueAsyncEmail],
+        asyncValidatorsDebounceTime: 1000,
+      ),
       hintText: 'Enter email',
       labelText: 'Email');
   static FormField<String> password = FormField(
