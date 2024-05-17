@@ -76,7 +76,7 @@ class _FormSection3State extends ConsumerState<FormSection3> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: ReactiveTextField<String>(
-                      // key: const Key(control),
+                      key: ValueKey(control),
                       formControl: control as FormControl<String>,
                       focusNode: control == formArray.controls.last
                           ? _lastArrayFocusNode
