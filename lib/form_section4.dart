@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:test_reactive_forms/form/date_time_value_accessor.dart';
@@ -90,15 +91,15 @@ class _FormSection2State extends ConsumerState<FormSection4> {
         ),
         const SizedBox(height: 8.0),
         ReactiveSlider(
-          key: Key(FormStaticData.numberOfChildern.key),
-          formControlName: FormStaticData.numberOfChildern.fullName,
+          key: Key(FormStaticData.numberOfChildren.key),
+          formControlName: FormStaticData.numberOfChildren.fullName,
           max: 10,
           divisions: 10,
           labelBuilder: (double value) =>
               '${value.toStringAsFixed(2)} children',
         ),
         ReactiveValueListenableBuilder(
-          formControlName: FormStaticData.numberOfChildern.fullName,
+          formControlName: FormStaticData.numberOfChildren.fullName,
           builder: (context, control, child) {
             switch (control.value) {
               case null:
@@ -106,11 +107,25 @@ class _FormSection2State extends ConsumerState<FormSection4> {
               case 1:
                 return const Text("Number of child is 1");
               default:
-                return Text(
-                    "Number of children is ${(control.value as double).toInt()}");
+                return Text("Number of children is ${control.value}");
             }
           },
         ),
+        const SizedBox(height: 8.0),
+        ReactiveTextField(
+            key: Key(FormStaticData.ageOfChildren1.key),
+            formControlName: FormStaticData.ageOfChildren1.fullName,
+            textInputAction: TextInputAction.next,
+            keyboardType: const TextInputType.numberWithOptions(),
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              labelText: FormStaticData.ageOfChildren1.labelText,
+              hintText: FormStaticData.ageOfChildren1.hintText,
+              helperText: ' ',
+            ),
+            validationMessages: {
+              ValidationMessage.number: (error) => 'Age must be positive',
+            }),
         const SizedBox(height: 8.0),
         ReactiveFormConsumer(
           builder: (context, form, child) {

@@ -139,11 +139,11 @@ class FormStaticData {
       key: 'password',
       fullName: '${FormStaticData.systemInfo.name}.password',
       control: FormControl<String>(
-          // validators: [
-          //   Validators.required,
-          //   Validators.minLength(2),
-          // ],
-          ),
+        validators: [
+          Validators.required,
+          Validators.minLength(2),
+        ],
+      ),
       hintText: 'Enter password',
       labelText: 'Password');
   static FormField<String> passwordConfirm = FormField(
@@ -157,36 +157,36 @@ class FormStaticData {
   static FormField<Gender> gender = FormField(
       key: 'gender',
       control: FormControl<Gender>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ));
+        validators: [
+          Validators.required,
+        ],
+      ));
   static FormField<String> genderName = FormField(
       key: 'genderName',
       control: FormControl<String>(
-          // disabled: true,
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
+        disabled: true,
+        validators: [
+          Validators.required,
+        ],
+      ),
       hintText: 'Enter Gender Name',
       labelText: 'Enter Gender Name');
   static FormField<Country> currentCountry = FormField(
       key: 'currentCountry',
       control: FormControl<Country>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
+        validators: [
+          Validators.required,
+        ],
+      ),
       hintText: 'Enter Current Country',
       labelText: 'Enter Current Country');
   static FormField<CountryState> currentState = FormField(
       key: 'currentState',
       control: FormControl<CountryState>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
+        validators: [
+          Validators.required,
+        ],
+      ),
       hintText: 'Enter Current State',
       labelText: 'Enter Current State');
   static FormField<String> currentAddress1 = FormField(
@@ -208,15 +208,14 @@ class FormStaticData {
   // Contact Info
   static FormField<String> emailOrPhone = FormField(
       key: 'emailOrPhone',
-      control: FormControl<String>(
-          // validators: [
-          //   Validators.composeOR(
-          //     [
-          //       Validators.email,
-          //       Validators.pattern(r'/\d/g'),
-          //     ],
-          //   )
-          ),
+      control: FormControl<String>(validators: [
+        Validators.composeOR(
+          [
+            Validators.email,
+            Validators.pattern(r'/\d/g'),
+          ],
+        )
+      ]),
       hintText: 'Enter alternate email or phone number',
       labelText: 'Enter alternate email or phone number');
 
@@ -225,10 +224,10 @@ class FormStaticData {
   static FormField<DateTime> dateOfBirth = FormField(
       key: 'dateOfBirth',
       control: FormControl<DateTime>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
+        validators: [
+          Validators.required,
+        ],
+      ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
   static FormField<bool> spouse =
@@ -236,14 +235,22 @@ class FormStaticData {
   static FormField<DateTime> spouseBirth = FormField(
       key: 'spouseBirth',
       control: FormControl<DateTime>(
-          // validators: [
-          //   Validators.required,
-          // ],
-          ),
+        validators: [
+          Validators.required,
+        ],
+      ),
       hintText: 'YYYY-MM-DD',
       labelText: 'Enter Date of Birth');
-  static FormField<double> numberOfChildern =
-      FormField(key: 'numberOfChildern', control: FormControl<double>());
+  static FormField<int> numberOfChildren =
+      FormField(key: 'numberOfChildren', control: FormControl<int>());
+  static FormField<int> ageOfChildren1 = FormField(
+    key: 'ageOfChildren1',
+    control: FormControl<int>(validators: [
+      Validators.number(allowNegatives: false, allowedDecimals: 0)
+    ]),
+    hintText: 'Enter age of child 1 (if any)',
+    labelText: 'Enter age of child 1 (if any)',
+  );
 
   // Final Check
   static FormField<bool> acceptTerms = FormField(
@@ -298,16 +305,18 @@ class FormData extends _$FormData {
         FormStaticData.dateOfBirth.key: FormStaticData.dateOfBirth.control,
         FormStaticData.spouse.key: FormStaticData.spouse.control,
         FormStaticData.spouseBirth.key: FormStaticData.spouseBirth.control,
-        FormStaticData.numberOfChildern.key:
-            FormStaticData.numberOfChildern.control,
+        FormStaticData.numberOfChildren.key:
+            FormStaticData.numberOfChildren.control,
+        FormStaticData.ageOfChildren1.key:
+            FormStaticData.ageOfChildren1.control,
 
         // Final Check
         FormStaticData.acceptTerms.key: FormStaticData.acceptTerms.control,
       },
-      // validators: [
-      //   Validators.mustMatch(FormStaticData.password.field,
-      //       FormStaticData.passwordConfirm.field),
-      // ],
+      validators: [
+        Validators.mustMatch(FormStaticData.password.fullName,
+            FormStaticData.passwordConfirm.fullName),
+      ],
     );
   }
 
