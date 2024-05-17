@@ -105,7 +105,6 @@ class FormSection1 extends ConsumerWidget {
             return ElevatedButton(
               // TODO: Key to focus on button
               key: const Key('submit-section-1'),
-              // TODO: Password and password confim validation should happen here
               onPressed: form.control(FormStaticData.systemInfo.key).valid
                   ? () => onUpdateCurrentPageIndex(1)
                   : null,
