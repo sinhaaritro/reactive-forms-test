@@ -26,7 +26,7 @@ class UniqueEmailAsyncValidator extends AsyncValidator<dynamic> {
     final storedEmails = ['johndoe@email.com', 'john@email.com'];
 
     return Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 2),
       () => !storedEmails.contains(email),
     );
   }
